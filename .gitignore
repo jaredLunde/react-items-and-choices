@@ -1,0 +1,14 @@
+.remote-sync.json
+node_modules
+commonjs/
+es/
+.DS_Store
+yarn-error.log
+dist/react-cake.js
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

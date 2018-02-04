@@ -248,6 +248,27 @@ export class Choices extends React.PureComponent {
     toggle: PropTypes.func.isRequired,
   }
 
+  constructor (props) {
+    super(props)
+    this.choicesContext = {
+      select: this.select,
+      deselect: this.deselect,
+      toggle: this.toggle,
+
+      addChoice: this.props.addChoice,
+      deleteChoice: this.deleteChoice,
+      setChoices: this.setChoices,
+      clearChoices: this.clearChoices,
+      isChoice: this.props.isChoice,
+
+      select: this.props.select,
+      deselect: this.props.deselect,
+      setSelections: this.setSelections,
+      clearSelections: this.props.clearSelections,
+      isSelected: PropTypes.func.isRequired
+    }
+  }
+
   getChildContext () {
     return {
       isSelected: this.props.isSelected,
@@ -325,32 +346,8 @@ export class Choices extends React.PureComponent {
   }
 
   render () {
-    const {
-      children,
-      selectionsPropName,
-      choicesPropName,
-      subscribe,
-      unsubscribe,
-      select,
-      deselect,
-      toggle,
-      setSelections,
-      setChoices,
-      clearChoices,
-      deleteChoice,
-      minSelections,
-      ...props
-    } = this.props
-
-    return children({
-      select: this.select,
-      deselect: this.deselect,
-      toggle: this.toggle,
-      setSelections: this.setSelections,
-      setChoices: this.setChoices,
-      clearChoices: this.clearChoices,
-      deleteChoice: this.deleteChoice,
-      ...props
-    })
+    this.choicesContext[selectionsPropName] = this.props[selectionsPropName]
+    this.choicesContext[choicesPropName] = this.props[choicesPropName]
+    return children(this.choicesContext)
   }
 }
